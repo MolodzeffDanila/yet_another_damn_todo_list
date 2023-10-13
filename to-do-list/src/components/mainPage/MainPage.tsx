@@ -1,11 +1,24 @@
-import { useContext } from "react"
-import { ThemeContext } from "../../providers/ThemeProvider"
+import { useStore } from "zustand";
+import { useTodoStore } from "../../store/store";
+import { ToDoStoreType, dayNames } from "../../store/storeTypes";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
+import { DayListCard } from "../dayListCard/DayListCard";
+import "./MainPageStyles.css"
+
+export const dayList:dayNames[] = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
 
 export const MainPage = () => {
-    const themeData = useContext(ThemeContext);
+
+    const { toDoList } = useTodoStore();
+
     return <>
         <ThemeToggle/>
-        <h1>{themeData.theme}</h1>
+        <div className="toDoList">
+            {dayList.map((day)=>{
+                return <div className="toDoCard">
+                    <DayListCard day={day} dailyTasks={toDoList[day]}/>
+                </div>
+            })}
+        </div>
     </>
 }

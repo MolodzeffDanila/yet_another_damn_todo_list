@@ -1,0 +1,9 @@
+.title{
+    font-size: 16pt;
+    font-weight: bolder;
+}
+
+.to-do-item{
+    border: 1px red solid ;
+    border-radius: 1vh;
+}
