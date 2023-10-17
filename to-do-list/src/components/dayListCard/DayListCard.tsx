@@ -10,11 +10,11 @@ export const DayListCard = ({day, dailyTasks}:{day:dayNames, dailyTasks:DayType[
     const { addTask } = useTodoStore();
     return <div >
     <div className="title-day">{day}</div>
+        <ToDoListForm day={day} addTask={addTask}/>
         {
             dailyTasks.map((task) => 
             <ToDoListItem task={task}/>
             )
         }
-        <ToDoListForm day={day} addTask={addTask}/>
     </div>
 }

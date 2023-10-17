@@ -27,14 +27,9 @@ const toDoListInitialValue = {
 export const useTodoStore = create<TodoState>((set) => ({
     toDoList: toDoListInitialValue,
     addTask: (state:ToDoStoreType,day:dayNames, newTask:DayType)=>{
-        //@ts-ignore
         set((state)=>{
-            console.log("=-=-=-=-=-=-=-=-=-=-=")
-            console.log(newTask)
-            console.log(day)
-            console.log({...state.toDoList, [day]:[...state.toDoList[day],newTask]})
             return {
-                todoList: {...state.toDoList, [day]:[...state.toDoList[day],newTask]}
+                toDoList: {...state.toDoList, [day]:[...state.toDoList[day],newTask]}
             }
         })
     }
