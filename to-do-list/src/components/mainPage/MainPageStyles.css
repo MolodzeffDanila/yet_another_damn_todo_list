@@ -1,0 +1,13 @@
+.toDoList{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toDoCard{
+    margin-left: 5vh;
+    margin-right: 5vh;
+    border: 1px solid blue;
+    border-radius: 1vh;
+    padding: 1vh;
+}
