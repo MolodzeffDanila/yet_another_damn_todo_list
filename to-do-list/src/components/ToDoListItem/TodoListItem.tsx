@@ -1,9 +1,18 @@
+import { useContext } from "react";
 import { DayType } from "../../store/storeTypes"
 import "./TodoItemStyles.css"
-export const ToDoListItem = ({task}:{task:DayType}) => {
+import { ThemeContext } from "../../providers/ThemeProvider";
+export const ToDoListItem = ({task, onChange}:{task:DayType, onChange:(title:string)=>void}) => {
+    const {theme} = useContext(ThemeContext);
 
-    return <div className="to-do-item">
+    const handleDone = () =>{
+        console.log(task.title)
+        onChange(task.title);
+    }
+
+    return <div className={theme==="light" ? "to-do-item" : "to-do-item-dark"}>
         <div className="title">{task.title}</div>
         <p>{task.description}</p>
+        <input type="checkbox" checked={task.isDone} onChange={handleDone}></input>
     </div>
 }

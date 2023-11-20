@@ -15,6 +15,7 @@ export const ThemeToggle = () =>{
         setTheme(swither[theme])
     }
     return <>
+    <h2>Theme Switch</h2>
         <label className="switch">
             <input type="checkbox" onChange={handleChange}/>
             <span className="slider round"></span>

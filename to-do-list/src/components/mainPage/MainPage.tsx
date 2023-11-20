@@ -1,24 +1,41 @@
-import { useStore } from "zustand";
 import { useTodoStore } from "../../store/store";
-import { ToDoStoreType, dayNames } from "../../store/storeTypes";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 import { DayListCard } from "../dayListCard/DayListCard";
 import "./MainPageStyles.css"
-
-export const dayList:dayNames[] = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+import { ToDoListForm } from "../ToDoListItem/ToDoListForm";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../../providers/ThemeProvider";
+import { ToDoListSearch } from "../ToDoListSearch/ToDoListSearch";
 
 export const MainPage = () => {
 
-    const { toDoList } = useTodoStore();
+    const { toDoList, addTask, filteredToDoList, filterToDoList } = useTodoStore();
+    const {theme} = useContext(ThemeContext);
+    const [searchValue, setSearchValue] = useState('');
 
-    return <>
+    useEffect(()=>{
+        filterToDoList(searchValue)
+    }, [searchValue]);
+
+    console.log(searchValue, filteredToDoList)
+
+    return <div className={theme ==="light" ? "" : "darkBack"}>
         <ThemeToggle/>
-        <div className="toDoList">
-            {dayList.map((day)=>{
-                return <div className="toDoCard">
-                    <DayListCard day={day} dailyTasks={toDoList[day]}/>
+        <div className={theme ==="light" ? "toDoList" : "toDoList-dark"}>
+            <div className={theme ==="light" ? "toDoCard" : "toDoCard-dark"}>
+                <ToDoListSearch 
+                    searchValue={searchValue}
+                    setSearchValue={setSearchValue}
+                />
+            </div>
+            <div className={theme ==="light" ? "toDoCard" : "toDoCard-dark"}>
+                <ToDoListForm addTask={addTask}/>
+            </div>
+            {filteredToDoList.map((day)=>{
+                return <div className={theme ==="light" ? "toDoCard" : "toDoCard-dark"}>
+                    <DayListCard dailyTask={day}/>
                 </div>
             })}
         </div>
-    </>
+    </div>
 }

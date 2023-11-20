@@ -4,6 +4,11 @@
 }
 
 .to-do-item{
-    border: 1px red solid ;
+    border: 3px rgb(162, 33, 33) solid ;
+    border-radius: 1vh;
+}
+
+.to-do-item-dark{
+    border: 3px rgb(249, 127, 127) solid ;
     border-radius: 1vh;
 }

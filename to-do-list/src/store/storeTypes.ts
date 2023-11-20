@@ -1,6 +1,7 @@
 export type DayType = {
     title: string,
     description: string,
+    isDone: boolean
 }
 
 export type ToDoStoreType = {

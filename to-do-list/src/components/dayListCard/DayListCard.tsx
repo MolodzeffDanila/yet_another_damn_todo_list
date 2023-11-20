@@ -1,20 +1,14 @@
-import { useStore } from "zustand"
-import { DayType, dayNames } from "../../store/storeTypes"
-import { ToDoListForm } from "../ToDoListItem/ToDoListForm"
+import { useTodoStore } from "../../store/store"
+import { DayType,  } from "../../store/storeTypes"
 import { ToDoListItem } from "../ToDoListItem/TodoListItem"
 import "./DayListStyles.css"
-import { useTodoStore } from "../../store/store"
 
-export const DayListCard = ({day, dailyTasks}:{day:dayNames, dailyTasks:DayType[]}) =>{
+export const DayListCard = ({dailyTask}:{dailyTask:DayType}) =>{
 
-    const { addTask } = useTodoStore();
+    const { doneTask } = useTodoStore()
+
     return <div >
-    <div className="title-day">{day}</div>
-        <ToDoListForm day={day} addTask={addTask}/>
-        {
-            dailyTasks.map((task) => 
-            <ToDoListItem task={task}/>
-            )
-        }
+    <div className="title-day">{dailyTask.title}</div>
+        <ToDoListItem task={dailyTask} onChange={doneTask}/>
     </div>
 }
