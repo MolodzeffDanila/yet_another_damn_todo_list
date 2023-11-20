@@ -17,8 +17,6 @@ export const MainPage = () => {
         filterToDoList(searchValue)
     }, [searchValue]);
 
-    console.log(searchValue, filteredToDoList)
-
     return <div className={theme ==="light" ? "" : "darkBack"}>
         <ThemeToggle/>
         <div className={theme ==="light" ? "toDoList" : "toDoList-dark"}>

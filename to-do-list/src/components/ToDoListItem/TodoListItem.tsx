@@ -6,7 +6,6 @@ export const ToDoListItem = ({task, onChange}:{task:DayType, onChange:(title:str
     const {theme} = useContext(ThemeContext);
 
     const handleDone = () =>{
-        console.log(task.title)
         onChange(task.title);
     }
 

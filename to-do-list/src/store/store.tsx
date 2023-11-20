@@ -9,16 +9,17 @@ interface TodoState {
     filterToDoList: (searchValue: string) => void
   }
 
-const toDoListInitialValue = [{title:"Посуда",description:'уничтожить', isDone:false}]
+const toDoListInitialValue : DayType[] = []
 
 export const useTodoStore = create<TodoState>((set) => ({
     toDoList: toDoListInitialValue,
     filteredToDoList: toDoListInitialValue,
     filterToDoList: (searchValue: string) => set((state)=>{
-      state.filteredToDoList = searchValue ? state.filteredToDoList.filter((item)=>{
+      state.filteredToDoList = searchValue ? state.toDoList.filter((item)=>{
         return item.title.includes(searchValue) || item.description.includes(searchValue)
       }) : state.toDoList;
-      return state
+
+      return { filteredToDoList: state.filteredToDoList}
     }),
     addTask: (newTask: DayType) => set((state) => {
       state.toDoList.push(newTask)
@@ -26,7 +27,6 @@ export const useTodoStore = create<TodoState>((set) => ({
     }),
     doneTask: (title:string) => set((state)=>{
       state.toDoList = state.toDoList.map((item)=>{
-        console.log(state.toDoList)
         if(item.title === title){
           return {...item, isDone: !item.isDone}
         }else{

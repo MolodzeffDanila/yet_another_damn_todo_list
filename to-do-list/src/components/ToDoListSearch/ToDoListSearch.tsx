@@ -4,7 +4,11 @@ export const ToDoListSearch = ({searchValue, setSearchValue}:{searchValue: strin
     const handleChange = (event)=>{
         setSearchValue(event.target.value)
     }
-    return <>
-        <input type="text" onChange={handleChange}/>
-    </>
+    return <div className="search-header">
+        <input type="text" onChange={handleChange} placeholder="Поиск по заголовку"/>
+        <div> 
+            <label>Показывать выполненные</label>
+            <input type="checkbox"></input>
+        </div>
+    </div>
 }
