@@ -1,4 +1,7 @@
-export const ToDoListSearch = ({searchValue, setSearchValue}:{searchValue: string, setSearchValue:(value: string)=>void}) => {
+export const ToDoListSearch = ({searchValue, setSearchValue, setShowDone}:{
+    searchValue: string, 
+    setSearchValue:(value: string)=>void, 
+    setShowDone: ()=> void}) => {
 
     //@ts-ignore
     const handleChange = (event)=>{
@@ -8,7 +11,7 @@ export const ToDoListSearch = ({searchValue, setSearchValue}:{searchValue: strin
         <input type="text" onChange={handleChange} placeholder="Поиск по заголовку"/>
         <div> 
             <label>Показывать выполненные</label>
-            <input type="checkbox"></input>
+            <input type="checkbox" onChange={setShowDone}></input>
         </div>
     </div>
 }

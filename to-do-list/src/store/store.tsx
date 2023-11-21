@@ -7,6 +7,8 @@ interface TodoState {
     doneTask: (title: string) => void
     filteredToDoList: DayType[];
     filterToDoList: (searchValue: string) => void
+    isShowDone: boolean
+    setShowDone: () => void
   }
 
 const toDoListInitialValue : DayType[] = []
@@ -14,12 +16,24 @@ const toDoListInitialValue : DayType[] = []
 export const useTodoStore = create<TodoState>((set) => ({
     toDoList: toDoListInitialValue,
     filteredToDoList: toDoListInitialValue,
+    isShowDone: false,
+    setShowDone: () => set((state) => {
+      console.log(state.filteredToDoList)
+      state.isShowDone = !state.isShowDone
+      return { isShowDone: state.isShowDone}
+    }),
     filterToDoList: (searchValue: string) => set((state)=>{
-      state.filteredToDoList = searchValue ? state.toDoList.filter((item)=>{
-        return item.title.includes(searchValue) || item.description.includes(searchValue)
-      }) : state.toDoList;
-
-      return { filteredToDoList: state.filteredToDoList}
+      if(state.isShowDone){
+        state.filteredToDoList = searchValue ? state.toDoList.filter((item)=>{
+          return item.title.includes(searchValue) || item.description.includes(searchValue)
+        }) : state.toDoList;
+      }else{
+        state.filteredToDoList = searchValue ? state.toDoList.filter((item)=>{
+          return (item.title.includes(searchValue) || item.description.includes(searchValue)) && !item.isDone
+        }) : state.toDoList;
+      }
+    
+      return { filteredToDoList: state.toDoList}
     }),
     addTask: (newTask: DayType) => set((state) => {
       state.toDoList.push(newTask)
