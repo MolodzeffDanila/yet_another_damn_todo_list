@@ -1,4 +1,5 @@
 export type DayType = {
+    id: string,
     title: string,
     description: string,
     isDone: boolean

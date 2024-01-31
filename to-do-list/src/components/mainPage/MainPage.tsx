@@ -9,13 +9,13 @@ import { ToDoListSearch } from "../ToDoListSearch/ToDoListSearch";
 
 export const MainPage = () => {
 
-    const {toDoList, addTask, filteredToDoList, filterToDoList,setShowDone } = useTodoStore();
+    const {toDoList, addTask, filteredToDoList, filterToDoList,setShowDone, isShowDone } = useTodoStore();
     const {theme} = useContext(ThemeContext);
     const [searchValue, setSearchValue] = useState('');
 
     useEffect(()=>{
         filterToDoList(searchValue)
-    }, [searchValue, filterToDoList,  toDoList]);
+    }, [searchValue, filterToDoList, isShowDone]);
 
     return <div className={theme ==="light" ? "" : "darkBack"}>
         <ThemeToggle/>
